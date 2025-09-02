@@ -17,10 +17,14 @@ const router = createRouter({
       props: (route) => ({ page: parseInt(route.query.page) || 1 }),
     },
     {
-      path: '/about',
+      path: '/about-us',
       name: 'about',
       component: AboutView,
       props: { showExtra: false },
+    },
+    {
+      path: '/about',
+      redirect: { name: 'about' },
     },
     {
       path: '/about-extra',
@@ -29,7 +33,7 @@ const router = createRouter({
       props: { showExtra: true },
     },
     {
-      path: '/event/:id',
+      path: '/events/:id',
       name: 'event-layout',
       props: true,
       component: EventLayout,
@@ -50,6 +54,12 @@ const router = createRouter({
           component: EventEdit,
         },
       ],
+    },
+    {
+      path: '/event/:afterEvent(.*)',
+      redirect: (to) => {
+        return { path: '/events/' + to.params.afterEvent }
+      },
     },
     {
       path: '/:pathMatch(.*)',
