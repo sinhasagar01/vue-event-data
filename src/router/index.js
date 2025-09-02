@@ -11,15 +11,19 @@ const router = createRouter({
       path: '/',
       name: 'event-list',
       component: EventListView,
+      props: (route) => ({ page: parseInt(route.query.page) || 1 }),
     },
     {
       path: '/about',
       name: 'about',
       component: AboutView,
-      // route leve code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import('../views/AboutView.vue'),
+      props: { showExtra: false },
+    },
+    {
+      path: '/about-extra',
+      name: 'about-extra',
+      component: AboutView,
+      props: { showExtra: true },
     },
     {
       path: '/event/:id',

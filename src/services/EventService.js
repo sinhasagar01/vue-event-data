@@ -18,8 +18,8 @@ const apiClient = axios.create({
 // It is going to return the Axios API client that we created above
 // Which will make a get request and we will pass a string which will add onto the baseURL
 export default {
-  getEvents() {
-    return apiClient.get('/events')
+  getEvents(perPage, page) {
+    return apiClient.get('/events?_limit=' + perPage + '&_page=' + page)
   },
   getEventById(id) {
     return apiClient.get('/events/' + id)
